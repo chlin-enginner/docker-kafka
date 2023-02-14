@@ -1,0 +1,50 @@
+version: '3.9'
+
+services:
+  kafka1:
+    image: sauljabin/kafka:latest
+    environment:
+      - TZ=Asia/Shanghai
+      - JMX_PORT=19095
+      - CLUSTER_ID=wxLxPZtASCerxqrSIVDzjw
+    restart: on-failure
+    ports:
+      - 19092:19092
+      - 19095:19095
+    volumes:
+      - /Users/rudy/dockerfiles/kafka3/instance1/data:/data
+      - /Users/rudy/dockerfiles/kafka3/instance1/logs:/kafka/logs
+      - /Users/rudy/dockerfiles/kafka3/instance1/config/kafka1.properties:/kafka/config/kafka.properties
+    command: kafka-raft
+
+  kafka2:
+    image: sauljabin/kafka:latest
+    environment:
+      - TZ=Asia/Shanghai
+      - JMX_PORT=29095
+      - CLUSTER_ID=wxLxPZtASCerxqrSIVDzjw
+    restart: on-failure
+    ports:
+      - 29092:29092
+      - 29095:29095
+    volumes:
+      - /Users/rudy/dockerfiles/kafka3/instance2/data:/data
+      - /Users/rudy/dockerfiles/kafka3/instance2/logs:/kafka/logs
+      - /Users/rudy/dockerfiles/kafka3/instance2/config/kafka2.properties:/kafka/config/kafka.properties
+    command: kafka-raft
+
+  kafka3:
+    image: sauljabin/kafka:latest
+    environment:
+      - TZ=Asia/Shanghai
+      - JMX_PORT=39095
+      - CLUSTER_ID=wxLxPZtASCerxqrSIVDzjw
+    restart: on-failure
+    ports:
+      - 39092:39092
+      - 39095:39095
+    volumes:
+      - /Users/rudy/dockerfiles/kafka3/instance3/data:/data
+      - /Users/rudy/dockerfiles/kafka3/instance3/logs:/kafka/logs
+      - /Users/rudy/dockerfiles/kafka3/instance3/config/kafka3.properties:/kafka/config/kafka.properties
+    command: kafka-raft
